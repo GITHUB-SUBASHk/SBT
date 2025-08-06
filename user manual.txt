@@ -1,0 +1,43 @@
+open ec2
+
+mkdir laravel-auth-app && cd bd-app
+docker run --rm -v $(pwd):/app composer create-project laravel/laravel .
+
+docker exec -it laravel_app bash
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init
+
+php artisan make:migration add_auth_fields_to_users_table
+
+
+php artisan migrate
+
+php artisan make:controller Auth/RegisterController
+
+php artisan make:mail VerifyEmailLink
+
+php artisan make:controller Auth/VerifyController
+
+php artisan make:model PasswordReset -m
+
+php artisan migrate
+
+php artisan make:controller Auth/ForgotPasswordController
+
+php artisan make:mail SendOtpMail
+
+>>> curm pages
+
+docker exec -it laravel_app bash
+composer require livewire/livewire
+
+php artisan make:model Profile -m
+
+
+php artisan make:livewire Profiles
+This creates:
+
+app/Http/Livewire/Profiles.php
+
+resources/views/livewire/profiles.blade.php
+
